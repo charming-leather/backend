@@ -3,7 +3,7 @@ const Error = require("../errors/apiError")
 const database = require('../repository/user.repository')
 
 exports.getUserById = async (id) => {
-    const user = database.getById(id)
+    const user = await database.getById(id)
 
     if (user.length === 0)
     {
