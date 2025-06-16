@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThatDeanGuy/api.git"
+    "url": "git+https://github.com/charming-leather/backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ThatDeanGuy/api/issues"
+    "url": "https://github.com/charming-leather/backend/issues"
   },
-  "homepage": "https://github.com/ThatDeanGuy/api#readme",
+  "homepage": "https://github.com/charming-leather/backend#readme",
   "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
