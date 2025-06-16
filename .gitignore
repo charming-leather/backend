@@ -1,0 +1,50 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# dotenv environment variables
+.env
+.env.test
+.env.*.local
+
+# WebStorm project files
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Optional: if you have dist or build folders
+dist/
+build/
+
+# Optional: coverage reports
+coverage/
+
+# Optional: local database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Optional: temporary files
+tmp/
+temp/
+
+# Optional: vs code if you use it
+.vscode/
+
+# Optional: TypeScript build output (if you ever add TS)
+*.tsbuildinfo
