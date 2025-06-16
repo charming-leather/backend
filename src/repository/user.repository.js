@@ -17,5 +17,9 @@ exports.findByEmail = async (email) => {
 
 exports.add = async (user) => {
     const result = await db.callProcedure('AddUser', [user.name, user.email, user.password])
-    return result[0][0]
+    if (result.affectedRows === 1) {
+        return {
+            success: true,
+        }
+    }
 }

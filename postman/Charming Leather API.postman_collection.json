@@ -34,13 +34,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/users/add",
+					"raw": "{{url}}/users/create",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"users",
-						"add"
+						"create"
 					]
 				}
 			},
@@ -80,7 +80,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QiLCJlbWFpbCI6InRlc3RpbmdAdGVzdC5jb20iLCJpYXQiOjE3NTAwNTA5MTgsImV4cCI6MTc1MDEzNzMxOH0.HmE6heTkBsIWZ81Nv6-a0VQWbf7GeHPXUeflRSAENSk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QiLCJlbWFpbCI6InRlc3RpbmdAdGVzdC5jb20iLCJpYXQiOjE3NTAwNTkyOTQsImV4cCI6MTc1MDE0NTY5NH0.AlMq9qoGhljDjXGOVGP9EMNtNedTvUojF_tKTKNc_iQ",
 							"type": "string"
 						}
 					]
