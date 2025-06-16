@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "7aae2cbb-2a03-4019-8838-1bac9871b57c",
+		"name": "Charming Leather API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17905089",
+		"_collection_link": "https://speeding-zodiac-567807.postman.co/workspace/Charming-Leather~54054e83-1b20-4695-a70a-9cc14e63e982/collection/17905089-7aae2cbb-2a03-4019-8838-1bac9871b57c?action=share&source=collection_link&creator=17905089"
+	},
+	"item": [
+		{
+			"name": "Orders",
+			"item": []
+		},
+		{
+			"name": "Stock",
+			"item": []
+		},
+		{
+			"name": "Customers",
+			"item": []
+		},
+		{
+			"name": "addUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test\",\r\n    \"email\": \"testing@test.com\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users/add",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"testing@test.com\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QiLCJlbWFpbCI6InRlc3RpbmdAdGVzdC5jb20iLCJpYXQiOjE3NTAwNTA5MTgsImV4cCI6MTc1MDEzNzMxOH0.HmE6heTkBsIWZ81Nv6-a0VQWbf7GeHPXUeflRSAENSk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
