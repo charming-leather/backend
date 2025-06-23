@@ -114,3 +114,107 @@ BEGIN
 END //
 
 DELIMITER ;
+-- 1. Create the Customers table
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(150) UNIQUE,
+    phone VARCHAR(20),
+    address TEXT
+); 
+
+-- 2. Create the Products table
+CREATE TABLE Products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(150),
+    description TEXT,
+    price DECIMAL(10, 2),
+    stock_quantity INT
+);
+
+-- 3. Create the CustomerOrders table
+CREATE TABLE CustomerOrders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50),
+    total_amount DECIMAL(10, 2),
+    payment_method VARCHAR(50),
+    shipping_address TEXT,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+
+-- 4. Create the OrderItems table
+CREATE TABLE OrderItems (
+    order_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price_per_unit DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES CustomerOrders(order_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
+
+DELIMITER// 
+
+CREATE PROCEDURE AddProduct (
+    IN p_name VARCHAR(100),
+    IN p_price DECIMAL(10,2),
+    IN p_category_id INT
+)
+BEGIN
+    INSERT INTO products (ProductName, UnitPrice, CategoryID)
+    VALUES (p_name, p_price, p_category_id);
+END//
+
+DELIMITER ;
+
+
+
+DELIMITER //
+CREATE PROCEDURE UpdateStock (
+    IN p_product_id INT,
+    IN p_quantity INT
+)
+BEGIN
+    DECLARE existing_stock INT;
+
+    
+    SELECT quantity_available INTO existing_stock
+    FROM stock
+    WHERE ProductID = p_product_id;
+
+   
+    IF existing_stock IS NOT NULL THEN
+        UPDATE stock
+        SET quantity_available = quantity_available + p_quantity,
+            LastUpdated = CURRENT_TIMESTAMP
+        WHERE ProductID = p_product_id;
+    ELSE
+        
+        INSERT INTO stock (ProductID, quantity_available)
+        VALUES (p_product_id, p_quantity);
+    END IF;
+END//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetProductsByCategory (
+    IN p_category_id INT
+)
+BEGIN
+    SELECT
+        p.ProductID,
+        p.ProductName,
+        p.UnitPrice,
+        c.CategoryName
+    FROM products p
+    JOIN categories c ON p.CategoryID = c.CategoryID
+    WHERE p.CategoryID = p_category_id;
+END//
+
+DELIMITER ;
