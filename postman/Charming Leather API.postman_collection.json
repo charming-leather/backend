@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "7aae2cbb-2a03-4019-8838-1bac9871b57c",
+		"_postman_id": "437b91a1-0084-4c30-8303-5ebb31d351d4",
 		"name": "Charming Leather API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17905089",
-		"_collection_link": "https://speeding-zodiac-567807.postman.co/workspace/Charming-Leather~54054e83-1b20-4695-a70a-9cc14e63e982/collection/17905089-7aae2cbb-2a03-4019-8838-1bac9871b57c?action=share&source=collection_link&creator=17905089"
+		"_exporter_id": "45961095",
+		"_collection_link": "https://aneesah-3861525.postman.co/workspace/Aneesah's-Workspace~b7fd4bda-822e-48fc-8b87-2d3ad6395847/collection/45961095-437b91a1-0084-4c30-8303-5ebb31d351d4?action=share&source=collection_link&creator=45961095"
 	},
 	"item": [
 		{
@@ -17,7 +17,416 @@
 		},
 		{
 			"name": "Customers",
-			"item": []
+			"item": [
+				{
+					"name": "getAllCustomers",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/customers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/customers/65",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Fadi Updated\",\r\n  \"email\": \"fadi.updated@example.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/customers/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Aneesah Rehman\",\r\n  \"email\": \"A163@gmail.com\",\r\n  \"phone\": \"0687893458\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/customers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/customers/9",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payments",
+			"item": [
+				{
+					"name": "ADD PAYMENT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test 1: Check if the response status code is 201 (Created)\r",
+									"pm.test(\"Status code is 201\", () => {\r",
+									"    // 201 means the payment was successfully created\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test 2: Make sure the response is an object\r",
+									"pm.test(\"Response is an object\", () => {\r",
+									"    // This checks that the API is returning a single object like { success: true }\r",
+									"    pm.expect(pm.response.json()).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"// Test 3: Check that the response includes success: true\r",
+									"pm.test(\"Response has success: true\", () => {\r",
+									"    const res = pm.response.json();\r",
+									"    // We expect the response to have a property called 'success' with the value true\r",
+									"    pm.expect(res).to.have.property(\"success\", true);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"order_id\": 6,\r\n  \"payment_method\": \"Card\",\r\n  \"amount\": 150.00,\r\n  \"reference_number\": \"TXN123456\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/payments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PAYMENT BY ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response is an array with 1 payment object\", () => {\r",
+									"    const payments = pm.response.json();\r",
+									"    pm.expect(payments).to.be.an('array');\r",
+									"    pm.expect(payments.length).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Payment object has payment_id, order_id, payment_method, and amount\", () => {\r",
+									"    const payments = pm.response.json();\r",
+									"    const payment = payments[0];\r",
+									"    pm.expect(payment).to.have.property('payment_id');\r",
+									"    pm.expect(payment).to.have.property('order_id');\r",
+									"    pm.expect(payment).to.have.property('payment_method');\r",
+									"    pm.expect(payment).to.have.property('amount');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/payments/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payments",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL PAYMENTS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response is an array\", () => {\r",
+									"    pm.expect(pm.response.json()).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"First payment has payment_id, order_id, payment_method, and amount\", () => {\r",
+									"    const payments = pm.response.json();\r",
+									"    if (payments.length > 0) {\r",
+									"        const firstPayment = payments[0];\r",
+									"        pm.expect(firstPayment).to.have.property('payment_id');\r",
+									"        pm.expect(firstPayment).to.have.property('order_id');\r",
+									"        pm.expect(firstPayment).to.have.property('payment_method');\r",
+									"        pm.expect(firstPayment).to.have.property('amount');\r",
+									"    } else {\r",
+									"        pm.expect(payments.length).to.be.above(0, \"Payments list should not be empty\");\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/payments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PAYMENT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test 1: Check if status code is 200 (success) or 404 (not found)\r",
+									"pm.test(\"Status code is 200 or 404\", () => {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);\r",
+									"});\r",
+									"\r",
+									"// Test 2: Check if response Content-Type is JSON\r",
+									"pm.test(\"Response is JSON\", () => {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"// Test 3: Handle different response messages based on status code\r",
+									"const res = pm.response.json();\r",
+									"\r",
+									"if (pm.response.code === 200) {\r",
+									"    // If delete was successful, expect this message\r",
+									"    pm.test(\"Response message confirms deletion\", () => {\r",
+									"        pm.expect(res).to.have.property(\"message\");\r",
+									"        pm.expect(res.message.toLowerCase()).to.include(\"deleted\");\r",
+									"    });\r",
+									"} else if (pm.response.code === 404) {\r",
+									"    // If payment not found, expect this message\r",
+									"    pm.test(\"Response message for not found\", () => {\r",
+									"        pm.expect(res).to.have.property(\"message\");\r",
+									"        pm.expect(res.message.toLowerCase()).to.include(\"not found\");\r",
+									"    });\r",
+									"} else if (pm.response.code === 500) {\r",
+									"    // If internal server error, log it for debugging\r",
+									"    console.warn(\"Server error response:\", pm.response.text());\r",
+									"    pm.test(\"Server returned 500 error\", () => {\r",
+									"        pm.expect(pm.response.code).to.equal(500);\r",
+									"    });\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/payments/43",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payments",
+								"43"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PAYMENT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test 1: Check that the status code is 200 (OK)\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test 2: Ensure the response is an object\r",
+									"pm.test(\"Response is an object\", () => {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"// Test 3: Check that the response has the correct success message\r",
+									"pm.test(\"Response has correct success message\", () => {\r",
+									"    const res = pm.response.json();\r",
+									"    // Update the expected message to match actual response\r",
+									"    pm.expect(res).to.have.property(\"message\", \"Payment updated successfully\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 200.00,\r\n  \"payment_method\": \"Cash\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/payments/40",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payments",
+								"40"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "addUser",
