@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 // Parse JSON bodies first
 app.use(express.json());
@@ -7,8 +8,13 @@ app.use(express.json());
 // Import routes
 const usersRoute = require('./src/routes/users.route');
 const authRoute = require('./src/routes/auth.route');
-const customerRoutes = require('./src/routes/customerRoutes'); 
+const customerRoutes = require('./src/routes/customerRoutes');
 const paymentRoutes = require('./src/routes/paymentRoutes');
+
+// CORS
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 
 // Use routes with proper base paths
 app.use('/api/v1/users', usersRoute);
@@ -18,6 +24,8 @@ app.use('/api/v1/payments', paymentRoutes);
 
 // Start DB connection
 require('./src/config/db');
+
+
 
 // Start server
 const port = process.env.PORT || 3000;
