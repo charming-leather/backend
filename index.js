@@ -11,7 +11,7 @@ const usersRoute = require('./src/routes/users.route');
 const authRoute = require('./src/routes/auth.route');
 const customerRoutes = require('./src/routes/customerRoutes');
 const paymentRoutes = require('./src/routes/paymentRoutes');
-
+const productRoutes = require('./src/routes/products.routes');
 // CORS
 app.use(cors({
   origin: "http://localhost:5173"
@@ -22,16 +22,11 @@ app.use('/api/v1', usersRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/payments', paymentRoutes);
-const usersRoute = require('./src/routes/users.route')
-const authRoute = require('./src/routes/auth.route')
-const productRoutes = require('./src/routes/products.routes');
-
-
-
-// Use routes
-app.use('/api/v1/', usersRoute)
-app.use('/api/v1/', authRoute)
 app.use('/api/v1/', productRoutes);
+
+
+
+
 
 
 // Health check test route
