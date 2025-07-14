@@ -155,3 +155,140 @@ CREATE TABLE OrderItems (
     FOREIGN KEY (order_id) REFERENCES CustomerOrders(order_id),
     FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
+-- 1. Create the Customers table
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(150) UNIQUE,
+    phone VARCHAR(20),
+    address TEXT
+); 
+
+-- 2. Create the Products table
+CREATE TABLE Products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(150),
+    description TEXT,
+    price DECIMAL(10, 2),
+    stock_quantity INT
+);
+
+-- 3. Create the CustomerOrders table
+CREATE TABLE CustomerOrders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50),
+    total_amount DECIMAL(10, 2),
+    payment_method VARCHAR(50),
+    shipping_address TEXT,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+
+-- 4. Create the OrderItems table
+CREATE TABLE OrderItems (
+    order_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price_per_unit DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES CustomerOrders(order_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
+
+-- THIS IS TO CREATE ORDER
+
+CREATE PROCEDURE CreateOrder(
+    IN p_customer_id INT,
+    IN p_status VARCHAR(50),
+    IN p_total_amount DECIMAL(10,2),
+    IN p_payment_method VARCHAR(50),
+    IN p_shipping_address TEXT
+)
+BEGIN
+    INSERT INTO CustomerOrders (customer_id, status, total_amount, payment_method, shipping_address)
+    VALUES (p_customer_id, p_status, p_total_amount, p_payment_method, p_shipping_address);
+END;
+
+-- THIS IS TO GET ALL ORDERS
+
+CREATE PROCEDURE GetAllOrders()
+BEGIN
+    SELECT * FROM CustomerOrders;
+END;
+
+
+-- THIS IS TO UPDATE ORDER
+
+CREATE PROCEDURE UpdateOrder(
+    IN p_order_id INT,
+    IN p_customer_id INT,
+    IN p_status VARCHAR(50),
+    IN p_total_amount DECIMAL(10,2),
+    IN p_payment_method VARCHAR(50),
+    IN p_shipping_address TEXT
+)
+BEGIN
+    UPDATE CustomerOrders
+    SET customer_id = p_customer_id,
+        status = p_status,
+        total_amount = p_total_amount,
+        payment_method = p_payment_method,
+        shipping_address = p_shipping_address
+    WHERE order_id = p_order_id;
+END;
+
+
+-- THIS IS TO DELETE ORDER
+CREATE PROCEDURE DeleteOrder(
+    IN p_order_id INT
+)
+BEGIN
+    DELETE FROM CustomerOrders WHERE order_id = p_order_id;
+END;
+
+-- THIS IS TO CREATE ORDER ITEM
+CREATE PROCEDURE CreateOrderItem(
+    IN p_order_id INT,
+    IN p_product_id INT,
+    IN p_quantity INT,
+    IN p_price_per_unit DECIMAL(10,2)
+)
+BEGIN
+    INSERT INTO OrderItems (order_id, product_id, quantity, price_per_unit)
+    VALUES (p_order_id, p_product_id, p_quantity, p_price_per_unit);
+END;
+
+-- THIS IS TO GET ALL ORDER ITEMS
+CREATE PROCEDURE GetAllOrderItems()
+BEGIN
+    SELECT * FROM OrderItems;
+END;
+
+-- THIS IS UPDATE ORDER ITEM
+CREATE PROCEDURE UpdateOrderItem(
+    IN p_order_item_id INT,
+    IN p_order_id INT,
+    IN p_product_id INT,
+    IN p_quantity INT,
+    IN p_price_per_unit DECIMAL(10,2)
+)
+BEGIN
+    UPDATE OrderItems
+    SET order_id = p_order_id,
+        product_id = p_product_id,
+        quantity = p_quantity,
+        price_per_unit = p_price_per_unit
+    WHERE order_item_id = p_order_item_id;
+END;
+
+-- THIS IS TO DELETE ORDER ITEM
+CREATE PROCEDURE DeleteOrderItem(
+    IN p_order_item_id INT
+)
+BEGIN
+    DELETE FROM OrderItems WHERE order_item_id = p_order_item_id;
+END;
+
