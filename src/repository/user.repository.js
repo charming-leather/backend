@@ -5,7 +5,7 @@ exports.getById = async (id) => {
     return result[0]
 }
 
-exports.get = async () => {
+exports.get = async () => { 
     const result = await db.callProcedure('GetAllUsers')
     return result[0]
 }
