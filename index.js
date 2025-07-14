@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-
+// Start DB connection
+require('./src/config/db');
 // Parse JSON bodies first
 app.use(express.json());
 
@@ -17,15 +18,10 @@ app.use(cors({
 }));
 
 // Use routes with proper base paths
-app.use('/api/v1/users', usersRoute);
+app.use('/api/v1', usersRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/payments', paymentRoutes);
-
-// Start DB connection
-require('./src/config/db');
-
-
 
 // Start server
 const port = process.env.PORT || 3000;

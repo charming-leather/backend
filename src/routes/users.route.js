@@ -12,7 +12,7 @@ router.get('/users/:id', authEnabled, async (req, res) => {
     }
 })
 
-router.get('/users', authEnabled, async (req, res) => {
+router.get('/users', async (req, res) => {
     try {
         res.json(await userController.getAllUsers())
     } catch (err) {
