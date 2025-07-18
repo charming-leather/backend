@@ -1,47 +1,20 @@
 const db = require('../config/db')
+const {add} = require('../repository/product.repository');
+const { updateStock } = require('../repository/product.repository');
 
-exports.createProduct = async (req, res) => {
-  try {
-    console.log("📦 Add product request body:", req.body);
-
-    const { name, price, category_id } = req.body;
-
-    const [result] = await db.execute('CALL AddProduct(?, ?, ?)', [
-      name,
-      price,
-      category_id
-    ]);
-
-    res.status(201).json({
-      message: "✅ Product added successfully",
-      data: result[0]
-    });
-
-  } catch (error) {
-    console.error("❌ Error creating product:", error);
-    res.status(500).json({ error: "Failed to add product" });
-  }
+// 1. Create a new product using AddProduct stored procedure
+exports.createProduct = async (name, price, categoryId) => {
+const result = await add(name, price, categoryId);
+return result;
 };
-
-
 
 
 // 2. Update product stock using UpdateStock stored procedure
-exports.updateStock = async (req, res) => {
-  const productId = req.params.id;
-  const { quantity } = req.body;
-
-  try {
-    const [result] = await db.execute('CALL UpdateStock(?, ?)', [productId, quantity]);
-    res.status(200).json({
-      message: '✅ Stock updated successfully',
-      data: result[0]
-    });
-  } catch (error) {
-    console.error('❌ Error updating stock:', error);
-    res.status(500).json({ error: 'Failed to update stock' });
-  }
+exports.updateStock = async (productId, quantity) => {
+  const result = await updateStock(productId, quantity);
+  return result;
 };
+
 
 
 // 3. Get products by category using GetProductsByCategory stored procedure
