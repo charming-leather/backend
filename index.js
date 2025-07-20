@@ -19,3 +19,5 @@ app.listen(port, () => {
 
 // Start DB connection
 require('./src/config/db')
+ const app = require('./server');
+app.listen(3000, () => console.log('Server running on port 3000'));
