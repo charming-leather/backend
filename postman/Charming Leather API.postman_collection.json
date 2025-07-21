@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "5873488c-20a3-427a-93b7-fb29e2170156",
+		"_postman_id": "437b91a1-0084-4c30-8303-5ebb31d351d4",
 		"name": "Charming Leather API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "46004752",
-		"_collection_link": "https://lebohangtlaitlai.postman.co/workspace/Lebohang-Tlaitlai's-Workspace~4ac192f7-be17-4b65-8177-3af1455e954f/collection/46004752-5873488c-20a3-427a-93b7-fb29e2170156?action=share&source=collection_link&creator=46004752"
+		"_exporter_id": "45961095",
+		"_collection_link": "https://aneesah-3861525.postman.co/workspace/Aneesah's-Workspace~b7fd4bda-822e-48fc-8b87-2d3ad6395847/collection/45961095-437b91a1-0084-4c30-8303-5ebb31d351d4?action=share&source=collection_link&creator=45961095"
 	},
 	"item": [
 		{
@@ -421,96 +421,6 @@
 							"path": [
 								"payments",
 								"40"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Products",
-			"item": [
-				{
-					"name": "Add product",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Leather Belt\",\r\n  \"price\": 299.99,\r\n  \"category_id\": 2\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/v1/products\n",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"products\n"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update stock",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"quantity\": 22\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/v1/products/1/stock",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"products",
-								"1",
-								"stock"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Products by Category",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/v1/products/category/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"products",
-								"category",
-								"1"
 							]
 						}
 					},
