@@ -11,6 +11,7 @@ const usersRoute = require('./src/routes/users.route');
 const authRoute = require('./src/routes/auth.route');
 const customerRoutes = require('./src/routes/customerRoutes');
 const paymentRoutes = require('./src/routes/paymentRoutes');
+const ordersRoutes = require ('./src/routes/ordersRoutes');
 
 // CORS
 app.use(cors({
@@ -22,6 +23,7 @@ app.use('/api/v1', usersRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/payments', paymentRoutes);
+app.use('/api/v1/orders', ordersRoutes)
 
 // Start server
 const port = process.env.PORT || 3000;
