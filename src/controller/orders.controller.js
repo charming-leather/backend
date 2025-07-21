@@ -1,5 +1,7 @@
 const Error = require("../errors/apiError");
 const database = require("../repository/orders.repository");
+const ApiError = require('../errors/apiError');
+
 
 exports.getOrdersById = async (id) => {
   const order = await database.getById(id);
@@ -60,6 +62,7 @@ exports.deleteOrder = async (id) => {
     return { message: "Order deleted successfully" };
   } catch (err) {
     console.error("Database error in deleteOrder:", err);
-    throw Error.internal("Could not delete order");
+    throw ApiError.notFound(`Order with ID ${id} does not exist`);
+
   }
 };

@@ -23,7 +23,7 @@ app.use('/api/v1', usersRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/payments', paymentRoutes);
-app.use('/api/v1/orders', ordersRoutes)
+app.use('/api/v1/orders', ordersRoutes);
 
 // Start server
 const port = process.env.PORT || 3000;
