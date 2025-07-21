@@ -18,7 +18,6 @@ router.post('/products/create', async (req, res) => {
   }
 });
 
-
 // 2. Update Stock for a Product
 router.patch('/products/:productId/stock', async (req, res) => {
   const { productId } = req.params;
@@ -36,26 +35,16 @@ router.patch('/products/:productId/stock', async (req, res) => {
   }
 });
 
-
-
-
-
 // 3. Get Products by Category ID
-
 router.get('/products/category/:categoryId', async (req, res) => {
   const { categoryId } = req.params;
 
   try {
-    const result = await db.query('CALL GetProductsByCategory(?)', [categoryId]);
-    console.log('📦 Products by category result:', result);
-
-    // Return the first result set
-    res.status(200).json({ data: result[0] });
-  } catch (err) {
-    console.error('❌ GetProductsByCategory error:', err);
-    res.status(500).json({ error: err.message || 'Failed to fetch products by category' });
+    const result = await productController.getByCategory(categoryId);
+    res.status(200).json(result); // result should be { success, data }
+  } catch (error) {
+    res.status(500).json({ error: error.message || 'Failed to fetch products by category' });
   }
 });
-
 
 module.exports = router;

@@ -24,17 +24,10 @@ app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 app.use('/api/v1/', productRoutes);
 
-
-
-
-
-
 // Health check test route
 app.get('/ping', (req, res) => {
   res.send('✅ Backend is alive');
 });
-
-
 
 // Start server
 const port = process.env.PORT || 3000;

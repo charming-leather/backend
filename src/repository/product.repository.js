@@ -1,17 +1,20 @@
 const db = require('../config/db')
 
-
-// Get product by ID (if needed)
-exports.getById = async (productId) => {
-    const [result] = await db.query('SELECT * FROM products WHERE ProductID = ?', [productId])
-    return result[0]
-}
-
 // Get all products in a category (calls GetProductsByCategory)
 exports.getByCategory = async (categoryId) => {
-    const [result] = await db.execute('CALL GetProductsByCategory(?)', [categoryId])
-    return result[0] // First result set
-}
+  const result = await db.callProcedure('GetProductsByCategory', [categoryId]);
+  if (result && result.length > 0) {
+    return {
+      success: true,
+      data: result[0], // First result set
+    };
+  } else {
+    return {
+      success: false,
+      data: [],
+    };
+  }
+};
 
 // Add new product (calls AddProduct)
 exports.add = async (name, price, categoryId) => {
@@ -23,6 +26,7 @@ exports.add = async (name, price, categoryId) => {
   }
 }
 
+// Update stock for a product (calls UpdateStock)
 exports.updateStock = async (productId, quantity) => {
   const result = await db.callProcedure('UpdateStock', [productId, quantity]);
   return {
