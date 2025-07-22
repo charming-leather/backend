@@ -11,7 +11,7 @@ const usersRoute = require('./src/routes/users.route');
 const authRoute = require('./src/routes/auth.route');
 const customerRoutes = require('./src/routes/customerRoutes');
 const paymentRoutes = require('./src/routes/paymentRoutes');
-const ordersRoutes = require ('./src/routes/ordersRoutes');
+const productRoutes = require('./src/routes/products.routes');const ordersRoutes = require ('./src/routes/ordersRoutes');
 
 // CORS
 app.use(cors({
@@ -24,6 +24,12 @@ app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 app.use('/api/v1/orders', ordersRoutes);
+app.use('/api/v1/', productRoutes);
+
+// Health check test route
+app.get('/ping', (req, res) => {
+  res.send('✅ Backend is alive');
+});
 
 // Start server
 const port = process.env.PORT || 3000;
