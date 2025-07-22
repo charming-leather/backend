@@ -1,64 +1,68 @@
+const Error = require("../errors/apiError");
+const database = require("../repository/orders.repository");
 const ApiError = require('../errors/apiError');
-const {
-  getById,
-  getAll,
-  add,
-  update,
-  delete: deleteOrderRepo
-} = require('../repository/orders.repository');
 
-// Get order by ID
-const getOrderById = async (id) => {
-  const order = await getById(id);
-  if (!order) {
-    throw ApiError.notFound('Order not found');
+
+exports.getOrdersById = async (id) => {
+  const order = await database.getById(id);
+  if (!order || order.length === 0) {
+    throw Error.notFound("Order not found");
   }
   return order;
 };
 
-// Get all orders
-const getAllOrders = async () => {
-  return await getAll();
+exports.getAllOrders = async () => {
+  return await database.getAll();
 };
 
-// Create order
-const createOrder = async (order) => {
+exports.createOrder = async (order) => {
   if (
     !order.order_id ||
     !order.payment_method ||
     !order.amount ||
     !order.reference_number
   ) {
-    throw ApiError.badRequest('Missing required fields: order_id, payment_method, amount, or reference_number');
+    throw Error.badRequest(
+      "Missing required fields: order_id, payment_method, amount, or reference_number"
+    );
   }
-  return await add(order);
+
+  try {
+    return await database.add(order);
+  } catch (err) {
+    console.error("Database error in createOrder:", err);
+    throw Error.internal("Something went wrong while creating the order");
+  }
 };
 
-// Update order
-const updateOrder = async (id, orderData) => {
+exports.updateOrder = async (id, paymentData) => {
   if (!orderData.amount || !orderData.order_method) {
-    throw ApiError.badRequest('Missing required fields: amount or order_method');
+    throw Error.badRequest("Missing required fields: amount or order_method");
   }
-  const updated = await update(id, orderData);
-  if (!updated) {
-    throw ApiError.notFound('Order not found to update');
+
+  try {
+    const updated = await database.update(id, orderData);
+    if (!updated) {
+      throw Error.notFound("Order not found to update");
+    }
+    return { message: "Order updated successfully" };
+  } catch (err) {
+    console.error("Database error in updateOrder:", err);  // <---- Add this line
+    throw Error.internal("Could not update order");
   }
-  return updated;
 };
 
-// Delete order
-const deleteOrder = async (id) => {
-  const deleted = await deleteOrderRepo(id);
-  if (!deleted) {
-    throw ApiError.notFound('Order not found to delete');
-  }
-  return deleted;
-};
 
-module.exports = {
-  getOrderById,
-  getAllOrders,
-  createOrder,
-  updateOrder,
-  deleteOrder,
+exports.deleteOrder = async (id) => {
+  try {
+    const deleted = await database.delete(id);
+    if (!deleted) {
+      throw Error.notFound("Order not found to delete");
+    }
+    return { message: "Order deleted successfully" };
+  } catch (err) {
+    console.error("Database error in deleteOrder:", err);
+    throw ApiError.notFound(`Order with ID ${id} does not exist`);
+
+  }
 };
