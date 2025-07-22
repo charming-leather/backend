@@ -12,15 +12,18 @@ const pool = mariadb.createPool({
     connectTimeout: 10000,
 });
 
-(async () => {
+if (process.env.NODE_ENV !== 'test') {
+  (async () => {
     try {
-        const conn = await pool.getConnection()
-        console.log(`✅ Successfully connected to ${process.env.DB_NAME}`)
-        await conn.release()
-    } catch (err) {
-        console.error(`❌ Failed to connect to ${process.env.DB_NAME}:`, err)
+      const conn = await pool.getConnection();
+      console.log(`✅ Successfully connected to ${process.env.DB_NAME}`);
+      await conn.release();
+    } catch (error) {
+      console.error('❌ DB connection failed:', error);
     }
-})()
+  })();
+}
+
 
 async function query(sql, params) {
     let conn;
